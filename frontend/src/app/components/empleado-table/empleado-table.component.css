@@ -1,0 +1,5 @@
+/* Estilos específicos para el componente Dumb de la Tabla */
+.table-responsive {
+  border-radius: 8px;
+  overflow: hidden;
+}

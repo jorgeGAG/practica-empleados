@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-4 mb-4">
+    <app-empleado-form
+      [empleado]="selectedEmpleado"
+      (save)="onSaveEmpleado($event)"
+      (reset)="onResetForm()"
+    ></app-empleado-form>
+  </div>
+
+  <div class="col-md-8">
+    <app-empleado-table
+      [empleados]="empleados$ | async"
+      (edit)="onEditEmpleado($event)"
+      (delete)="onDeleteEmpleado($event)"
+    ></app-empleado-table>
+  </div>
+</div>
