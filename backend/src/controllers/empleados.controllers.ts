@@ -144,4 +144,11 @@ export class EmpleadosController {
             next(error);
         }
     };
+
+    getEmployees = this.getEmpleados;
+    getEmpleado = this.getEmpleados;
+    updateEmployee = this.updateEmpleado;
+    deleteEmployee = this.deleteEmpleado;
 }
+
+export { EmpleadosController as EmployeeController };

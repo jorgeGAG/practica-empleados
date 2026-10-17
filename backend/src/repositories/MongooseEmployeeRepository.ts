@@ -10,6 +10,7 @@ export class MongooseEmployeeRepository
 
         return empleados.map((empleado) => ({
             id: empleado._id.toString(),
+            _id: empleado._id.toString(),
             nombre: empleado.nombre,
             cargo: empleado.cargo,
             departamento: empleado.departamento,
@@ -30,6 +31,7 @@ export class MongooseEmployeeRepository
 
         return {
             id: empleado._id.toString(),
+            _id: empleado._id.toString(),
             nombre: empleado.nombre,
             cargo: empleado.cargo,
             departamento: empleado.departamento,
@@ -45,6 +47,7 @@ export class MongooseEmployeeRepository
 
         return {
             id: nuevoEmpleado._id.toString(),
+            _id: nuevoEmpleado._id.toString(),
             nombre: nuevoEmpleado.nombre,
             cargo: nuevoEmpleado.cargo,
             departamento: nuevoEmpleado.departamento,
@@ -75,6 +78,7 @@ export class MongooseEmployeeRepository
 
         return {
             id: actualizado._id.toString(),
+            _id: actualizado._id.toString(),
             nombre: actualizado.nombre,
             cargo: actualizado.cargo,
             departamento: actualizado.departamento,

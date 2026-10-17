@@ -22,25 +22,26 @@ const empleadoController =
         empleadoRepository
     );
 
+// Rutas en español y alias en inglés (compatibilidad con stress-test.yml y PDF)
 router.get(
-    '/empleados',
+    ['/empleados', '/employees'],
     empleadoController.getEmpleados
 );
 
 router.get(
-    '/empleados/:id',
+    ['/empleados/:id', '/employees/:id'],
     validate({ params: employeeParamsSchema }),
     empleadoController.getEmpleadoById
 );
 
 router.post(
-    '/empleados',
+    ['/empleados', '/employees'],
     validate({ body: createEmployeeSchema }),
     empleadoController.addEmpleado
 );
 
 router.put(
-    '/empleados/:id',
+    ['/empleados/:id', '/employees/:id'],
     validate({
         params: employeeParamsSchema,
         body: updateEmployeeSchema
@@ -49,7 +50,7 @@ router.put(
 );
 
 router.delete(
-    '/empleados/:id',
+    ['/empleados/:id', '/employees/:id'],
     validate({ params: employeeParamsSchema }),
     empleadoController.deleteEmpleado
 );
