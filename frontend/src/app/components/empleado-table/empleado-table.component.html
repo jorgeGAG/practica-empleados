@@ -1,42 +1,111 @@
-<div class="card shadow-sm">
+<div class="card table-card border-0 shadow-premium">
+  <!-- Card Header -->
+  <div class="card-header bg-transparent border-0 pt-4 px-4 pb-3">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <div class="d-flex align-items-center gap-3">
+        <div class="table-header-icon bg-blue-gradient">
+          <i class="bi bi-people-fill"></i>
+        </div>
+        <div>
+          <h5 class="fw-bold mb-0 text-dark">Directorio de Colaboradores</h5>
+          <span class="text-secondary small">Lista sincronizada con la base de datos</span>
+        </div>
+      </div>
+
+      <!-- Badge de Total -->
+      <span class="badge bg-slate-subtle text-slate-dark fw-semibold px-3 py-2 rounded-pill fs-7">
+        <i class="bi bi-person-check-fill me-1 text-primary"></i>
+        Total: {{ empleados ? empleados.length : 0 }} empleados
+      </span>
+    </div>
+  </div>
+
+  <!-- Card Body / Tabla -->
   <div class="card-body p-0">
     <div class="table-responsive">
-      <table class="table table-striped table-hover align-middle mb-0">
-        <thead class="table-dark">
+      <table class="table table-hover align-middle mb-0 custom-table">
+        <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Cargo</th>
+            <th class="ps-4">Colaborador</th>
+            <th>Puesto / Cargo</th>
             <th>Departamento</th>
             <th>Sueldo</th>
-            <th class="text-center">Operaciones</th>
+            <th class="text-center pe-4">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let empleado of empleados">
-            <td>{{ empleado.nombre }}</td>
-            <td>{{ empleado.cargo }}</td>
-            <td>{{ empleado.departamento }}</td>
-            <td>${{ empleado.sueldo }}</td>
-            <td class="text-center">
-              <button
-                class="btn btn-secondary btn-sm me-2"
-                type="button"
-                (click)="onEdit(empleado)"
-              >
-                Editar
-              </button>
-              <button
-                class="btn btn-danger btn-sm"
-                type="button"
-                (click)="onDelete(empleado)"
-              >
-                Eliminar
-              </button>
+          <tr *ngFor="let empleado of empleados" class="employee-row">
+            <!-- Avatar e Identidad -->
+            <td class="ps-4 py-3">
+              <div class="d-flex align-items-center gap-3">
+                <div class="avatar-box">
+                  {{ (empleado.nombre ? empleado.nombre.charAt(0) : 'E') | uppercase }}
+                </div>
+                <div>
+                  <span class="fw-bold text-dark d-block">{{ empleado.nombre }}</span>
+                  <span class="text-secondary" style="font-size: 0.75rem;">ID: {{ (empleado._id || empleado.id) | slice:-6 }}</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Cargo -->
+            <td>
+              <span class="text-dark fw-medium">{{ empleado.cargo }}</span>
+            </td>
+
+            <!-- Departamento -->
+            <td>
+              <span class="badge dept-badge fw-semibold rounded-pill px-3 py-1">
+                <i class="bi bi-building me-1"></i>
+                {{ empleado.departamento }}
+              </span>
+            </td>
+
+            <!-- Sueldo -->
+            <td>
+              <span class="fw-bold text-emerald">
+                ${{ empleado.sueldo }}
+              </span>
+            </td>
+
+            <!-- Acciones -->
+            <td class="text-center pe-4">
+              <div class="btn-group gap-2">
+                <button
+                  class="btn btn-action btn-edit"
+                  type="button"
+                  (click)="onEdit(empleado)"
+                  title="Editar empleado"
+                >
+                  <i class="bi bi-pencil-fill"></i>
+                  <span class="d-none d-xl-inline ms-1">Editar</span>
+                </button>
+
+                <button
+                  class="btn btn-action btn-delete"
+                  type="button"
+                  (click)="onDelete(empleado)"
+                  title="Eliminar empleado"
+                >
+                  <i class="bi bi-trash3-fill"></i>
+                  <span class="d-none d-xl-inline ms-1">Eliminar</span>
+                </button>
+              </div>
             </td>
           </tr>
+
+          <!-- Estado Vacío -->
           <tr *ngIf="!empleados || empleados.length === 0">
-            <td colspan="5" class="text-center py-4 text-muted">
-              No hay empleados registrados actualmente.
+            <td colspan="5" class="text-center py-5">
+              <div class="empty-state py-4">
+                <div class="empty-icon mb-3">
+                  <i class="bi bi-folder2-open"></i>
+                </div>
+                <h6 class="fw-bold text-dark mb-1">No hay colaboradores registrados</h6>
+                <p class="text-muted small mb-0">
+                  Utiliza el formulario de la izquierda para agregar tu primer empleado.
+                </p>
+              </div>
             </td>
           </tr>
         </tbody>

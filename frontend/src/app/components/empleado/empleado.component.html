@@ -1,17 +1,78 @@
-<div class="row">
-  <div class="col-md-4 mb-4">
-    <app-empleado-form
-      [empleado]="selectedEmpleado"
-      (save)="onSaveEmpleado($event)"
-      (reset)="onResetForm()"
-    ></app-empleado-form>
-  </div>
+<!-- Barra Superior de Navegación -->
+<header class="navbar navbar-expand-lg navbar-dark bg-dark-slate shadow-sm sticky-top">
+  <div class="container-fluid px-4">
+    <!-- Brand / Logotipo -->
+    <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="#">
+      <span class="brand-icon">
+        <i class="bi bi-people-fill"></i>
+      </span>
+      <span class="fs-5 tracking-tight">StaffFlow <span class="badge bg-indigo-subtle text-indigo fw-medium ms-1">PRO</span></span>
+    </a>
 
-  <div class="col-md-8">
-    <app-empleado-table
-      [empleados]="empleados$ | async"
-      (edit)="onEditEmpleado($event)"
-      (delete)="onDeleteEmpleado($event)"
-    ></app-empleado-table>
+    <!-- Acciones del Usuario a la Derecha -->
+    <div class="d-flex align-items-center gap-3 ms-auto">
+      <!-- Usuario Logueado Badge -->
+      <div *ngIf="usuarioActual" class="d-flex align-items-center gap-2 user-pill px-3 py-1 rounded-pill">
+        <div class="user-avatar-circle">
+          {{ (usuarioActual.nombre ? usuarioActual.nombre.charAt(0) : 'U') | uppercase }}
+        </div>
+        <div class="d-none d-sm-block text-start lh-1">
+          <span class="fw-semibold text-white small d-block">{{ usuarioActual.nombre }}</span>
+          <span class="text-secondary" style="font-size: 0.72rem;">{{ usuarioActual.email }}</span>
+        </div>
+      </div>
+
+      <!-- Botón de Cerrar Sesión -->
+      <button (click)="onLogout()" class="btn btn-outline-danger btn-sm d-flex align-items-center gap-2 rounded-pill px-3 py-1 fw-semibold">
+        <i class="bi bi-box-arrow-right"></i>
+        <span class="d-none d-md-inline">Cerrar Sesión</span>
+      </button>
+    </div>
   </div>
-</div>
+</header>
+
+<!-- Contenido Principal -->
+<main class="dashboard-wrapper py-4 px-3 px-md-4">
+  <div class="container-fluid max-w-7xl">
+
+    <!-- Header del Dashboard -->
+    <div class="row mb-4 align-items-center">
+      <div class="col-md-7">
+        <h2 class="fw-bold text-dark mb-1 d-flex align-items-center gap-2">
+          <span>Panel de Gestión de Empleados</span>
+        </h2>
+        <p class="text-secondary small mb-0">
+          Administra la nómina, puestos y departamentos de tu organización en tiempo real con MongoDB Atlas.
+        </p>
+      </div>
+      <div class="col-md-5 text-md-end mt-3 mt-md-0">
+        <div class="d-inline-flex align-items-center gap-2 bg-white px-3 py-2 rounded-3 shadow-sm border">
+          <i class="bi bi-hdd-network text-success fs-5"></i>
+          <span class="small fw-semibold text-secondary">Base de Datos: <strong class="text-dark">Mongo Atlas Conectado</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenido en 2 Columnas: Formulario a la Izquierda, Tabla a la Derecha -->
+    <div class="row g-4">
+      <!-- Columna Formulario -->
+      <div class="col-12 col-lg-4">
+        <app-empleado-form
+          [empleado]="selectedEmpleado"
+          (save)="onSaveEmpleado($event)"
+          (reset)="onResetForm()"
+        ></app-empleado-form>
+      </div>
+
+      <!-- Columna Tabla -->
+      <div class="col-12 col-lg-8">
+        <app-empleado-table
+          [empleados]="empleados$ | async"
+          (edit)="onEditEmpleado($event)"
+          (delete)="onDeleteEmpleado($event)"
+        ></app-empleado-table>
+      </div>
+    </div>
+
+  </div>
+</main>

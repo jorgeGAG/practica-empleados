@@ -1,0 +1,120 @@
+<div class="auth-page">
+  <div class="auth-container">
+    <div class="card auth-card border-0 shadow-premium">
+      <div class="card-body p-4 p-md-5">
+
+        <!-- Logo / Icon Header -->
+        <div class="text-center mb-4">
+          <div class="brand-badge mb-3">
+            <i class="bi bi-shield-lock-fill"></i>
+          </div>
+          <h3 class="fw-bold text-dark mb-1">
+            {{ esModoRegistro ? 'Crear Nueva Cuenta' : 'Bienvenido de Nuevo' }}
+          </h3>
+          <p class="text-muted small">
+            {{ esModoRegistro 
+                ? 'Regístrate para acceder al panel de gestión de empleados' 
+                : 'Ingresa tus credenciales para acceder al sistema' }}
+          </p>
+        </div>
+
+        <!-- Alerta de Error -->
+        <div *ngIf="mensajeError" class="alert alert-danger d-flex align-items-center rounded-3 py-2 px-3 mb-3 border-0 shadow-sm" role="alert">
+          <i class="bi bi-exclamation-triangle-fill me-2 fs-5"></i>
+          <div class="small fw-medium">{{ mensajeError }}</div>
+        </div>
+
+        <!-- Alerta de Éxito -->
+        <div *ngIf="mensajeExito" class="alert alert-success d-flex align-items-center rounded-3 py-2 px-3 mb-3 border-0 shadow-sm" role="alert">
+          <i class="bi bi-check-circle-fill me-2 fs-5"></i>
+          <div class="small fw-medium">{{ mensajeExito }}</div>
+        </div>
+
+        <!-- Formulario -->
+        <form (ngSubmit)="onSubmit()">
+
+          <!-- Campo Nombre (Solo en registro) -->
+          <div class="mb-3" *ngIf="esModoRegistro">
+            <label class="form-label text-secondary fw-semibold small mb-1">Nombre Completo</label>
+            <div class="input-group input-group-lg custom-input-group">
+              <span class="input-group-text bg-light border-end-0 text-muted">
+                <i class="bi bi-person-fill"></i>
+              </span>
+              <input 
+                type="text" 
+                class="form-control bg-light border-start-0 ps-0" 
+                placeholder="Ej. Juan Pérez"
+                [(ngModel)]="nombre" 
+                name="nombre" 
+                required 
+              />
+            </div>
+          </div>
+
+          <!-- Campo Correo -->
+          <div class="mb-3">
+            <label class="form-label text-secondary fw-semibold small mb-1">Correo Electrónico</label>
+            <div class="input-group input-group-lg custom-input-group">
+              <span class="input-group-text bg-light border-end-0 text-muted">
+                <i class="bi bi-envelope-fill"></i>
+              </span>
+              <input 
+                type="email" 
+                class="form-control bg-light border-start-0 ps-0" 
+                placeholder="ejemplo@empresa.com"
+                [(ngModel)]="email" 
+                name="email" 
+                required 
+              />
+            </div>
+          </div>
+
+          <!-- Campo Contraseña -->
+          <div class="mb-4">
+            <label class="form-label text-secondary fw-semibold small mb-1">Contraseña</label>
+            <div class="input-group input-group-lg custom-input-group">
+              <span class="input-group-text bg-light border-end-0 text-muted">
+                <i class="bi bi-lock-fill"></i>
+              </span>
+              <input 
+                type="password" 
+                class="form-control bg-light border-start-0 ps-0" 
+                placeholder="••••••••"
+                [(ngModel)]="password" 
+                name="password" 
+                required 
+              />
+            </div>
+          </div>
+
+          <!-- Botón de Envío -->
+          <button 
+            type="submit" 
+            class="btn btn-primary btn-lg w-100 fw-bold py-3 btn-gradient shadow-sm"
+            [disabled]="cargando"
+          >
+            <span *ngIf="!cargando">
+              <i class="bi" [ngClass]="esModoRegistro ? 'bi-person-plus-fill' : 'bi-box-arrow-in-right'"></i>
+              {{ esModoRegistro ? 'Registrarme e Iniciar' : 'Iniciar Sesión' }}
+            </span>
+            <span *ngIf="cargando">
+              <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              Procesando...
+            </span>
+          </button>
+        </form>
+
+        <!-- Divisor y Switch de Modo -->
+        <div class="text-center mt-4 pt-3 border-top">
+          <p class="text-muted small mb-0">
+            {{ esModoRegistro ? '¿Ya tienes una cuenta registrada?' : '¿Aún no tienes una cuenta?' }}
+            <a href="javascript:void(0)" (click)="toggleModo()" class="text-primary fw-bold text-decoration-none ms-1">
+              {{ esModoRegistro ? 'Inicia sesión aquí' : 'Crea una gratis' }}
+            </a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

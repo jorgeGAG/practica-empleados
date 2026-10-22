@@ -1,0 +1,51 @@
+.bg-dark-slate {
+  background-color: #0f172a;
+  border-bottom: 1px solid #1e293b;
+}
+
+.brand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+  border-radius: 8px;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.bg-indigo-subtle {
+  background-color: rgba(99, 102, 241, 0.2);
+}
+
+.text-indigo {
+  color: #818cf8;
+}
+
+.user-pill {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+}
+
+.user-avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.dashboard-wrapper {
+  background-color: #f8fafc;
+  min-height: calc(100vh - 65px);
+}
+
+.max-w-7xl {
+  max-width: 1440px;
+}

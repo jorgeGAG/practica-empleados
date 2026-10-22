@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EmpleadoService } from '../../services/empleado.service';
+import { AuthService } from '../../services/auth.service';
 import { Empleado } from '../../models/empleado';
 
 @Component({
@@ -15,14 +16,24 @@ export class EmpleadoComponent implements OnInit {
 
   // Estado del empleado que se está editando actualmente
   selectedEmpleado: Empleado | null = null;
+  usuarioActual: any = null;
 
-  constructor(private readonly empleadoService: EmpleadoService) {}
+  constructor(
+    private readonly empleadoService: EmpleadoService,
+    private readonly authService: AuthService
+  ) {}
 
   ngOnInit(): void {
+    this.usuarioActual = this.authService.obtenerUsuario();
+
     // Inicia la carga de datos a través del servicio reactivo
     this.empleadoService.getEmpleados().subscribe({
       error: (err) => console.error('Error al cargar empleados:', err)
     });
+  }
+
+  onLogout(): void {
+    this.authService.logout();
   }
 
   // Maneja el evento emitido por el Dumb Component del formulario

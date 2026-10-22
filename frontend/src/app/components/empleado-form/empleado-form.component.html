@@ -1,66 +1,121 @@
-<div class="card shadow-sm">
-  <div class="card-body">
-    <h4 class="card-title text-center mb-3">
-      {{ (formData.id || formData._id) ? 'Editar Empleado' : 'Registro de Nuevo Empleado' }}
-    </h4>
+<div class="card form-card border-0 shadow-premium">
+  <!-- Card Header -->
+  <div class="card-header bg-transparent border-0 pt-4 px-4 pb-2">
+    <div class="d-flex align-items-center gap-3">
+      <div 
+        class="form-header-icon"
+        [ngClass]="(formData.id || formData._id) ? 'bg-amber-gradient' : 'bg-indigo-gradient'"
+      >
+        <i class="bi" [ngClass]="(formData.id || formData._id) ? 'bi-pencil-fill' : 'bi-person-plus-fill'"></i>
+      </div>
+      <div>
+        <h5 class="fw-bold mb-0 text-dark">
+          {{ (formData.id || formData._id) ? 'Modificar Empleado' : 'Nuevo Empleado' }}
+        </h5>
+        <span class="text-secondary small">
+          {{ (formData.id || formData._id) ? 'Actualiza los datos del empleado seleccionado' : 'Ingresa la información requerida' }}
+        </span>
+      </div>
+    </div>
+  </div>
 
+  <!-- Card Body -->
+  <div class="card-body px-4 py-3">
     <form #empleadoForm="ngForm" (ngSubmit)="onSubmit(empleadoForm)">
       <input type="hidden" name="id" [(ngModel)]="formData.id" />
 
-      <div class="form-group mb-3">
-        <label class="form-label">Nombre:</label>
-        <input
-          type="text"
-          class="form-control"
-          name="nombre"
-          placeholder="Ingrese su nombre"
-          required
-          [(ngModel)]="formData.nombre"
-        />
+      <!-- Nombre -->
+      <div class="mb-3">
+        <label class="form-label text-secondary fw-semibold small mb-1">Nombre Completo</label>
+        <div class="input-group custom-input-group">
+          <span class="input-group-text bg-light border-end-0 text-muted">
+            <i class="bi bi-person"></i>
+          </span>
+          <input
+            type="text"
+            class="form-control bg-light border-start-0 ps-0"
+            name="nombre"
+            placeholder="Ej. Carlos Mendoza"
+            required
+            [(ngModel)]="formData.nombre"
+          />
+        </div>
       </div>
 
-      <div class="form-group mb-3">
-        <label class="form-label">Cargo:</label>
-        <input
-          type="text"
-          name="cargo"
-          class="form-control"
-          placeholder="Ingrese su cargo"
-          required
-          [(ngModel)]="formData.cargo"
-        />
+      <!-- Cargo -->
+      <div class="mb-3">
+        <label class="form-label text-secondary fw-semibold small mb-1">Cargo / Puesto</label>
+        <div class="input-group custom-input-group">
+          <span class="input-group-text bg-light border-end-0 text-muted">
+            <i class="bi bi-briefcase"></i>
+          </span>
+          <input
+            type="text"
+            name="cargo"
+            class="form-control bg-light border-start-0 ps-0"
+            placeholder="Ej. Desarrollador Fullstack"
+            required
+            [(ngModel)]="formData.cargo"
+          />
+        </div>
       </div>
 
-      <div class="form-group mb-3">
-        <label class="form-label">Departamento:</label>
-        <input
-          type="text"
-          name="departamento"
-          class="form-control"
-          placeholder="Ingrese su departamento"
-          required
-          [(ngModel)]="formData.departamento"
-        />
+      <!-- Departamento -->
+      <div class="mb-3">
+        <label class="form-label text-secondary fw-semibold small mb-1">Departamento</label>
+        <div class="input-group custom-input-group">
+          <span class="input-group-text bg-light border-end-0 text-muted">
+            <i class="bi bi-buildings"></i>
+          </span>
+          <input
+            type="text"
+            name="departamento"
+            class="form-control bg-light border-start-0 ps-0"
+            placeholder="Ej. Tecnología, Ventas, RRHH"
+            required
+            [(ngModel)]="formData.departamento"
+          />
+        </div>
       </div>
 
-      <div class="form-group mb-3">
-        <label class="form-label">Sueldo:</label>
-        <input
-          type="number"
-          name="sueldo"
-          class="form-control"
-          placeholder="Ingrese su sueldo"
-          required
-          min="1"
-          [(ngModel)]="formData.sueldo"
-        />
+      <!-- Sueldo -->
+      <div class="mb-4">
+        <label class="form-label text-secondary fw-semibold small mb-1">Sueldo Mensual ($ USD)</label>
+        <div class="input-group custom-input-group">
+          <span class="input-group-text bg-light border-end-0 text-muted fw-bold">
+            <i class="bi bi-cash-stack"></i>
+          </span>
+          <input
+            type="number"
+            name="sueldo"
+            class="form-control bg-light border-start-0 ps-0"
+            placeholder="Ej. 1200"
+            required
+            min="1"
+            [(ngModel)]="formData.sueldo"
+          />
+        </div>
       </div>
 
-      <div class="d-flex gap-2">
-        <button class="btn btn-primary flex-grow-1" type="submit" [disabled]="empleadoForm.invalid">
-          {{ (formData.id || formData._id) ? 'Actualizar' : 'Guardar' }}
+      <!-- Botones de Acción -->
+      <div class="d-flex gap-2 pt-2">
+        <button 
+          class="btn flex-grow-1 fw-bold py-2 rounded-3 text-white shadow-sm"
+          [ngClass]="(formData.id || formData._id) ? 'btn-warning-gradient' : 'btn-indigo-gradient'"
+          type="submit" 
+          [disabled]="empleadoForm.invalid"
+        >
+          <i class="bi" [ngClass]="(formData.id || formData._id) ? 'bi-check2-circle' : 'bi-save'"></i>
+          {{ (formData.id || formData._id) ? 'Actualizar Registro' : 'Guardar Empleado' }}
         </button>
-        <button class="btn btn-secondary" type="button" (click)="onReset(empleadoForm)">
+
+        <button 
+          class="btn btn-outline-secondary px-3 rounded-3 fw-semibold" 
+          type="button" 
+          (click)="onReset(empleadoForm)"
+          title="Limpiar formulario"
+        >
+          <i class="bi bi-arrow-counterclockwise"></i>
           Limpiar
         </button>
       </div>

@@ -16,13 +16,15 @@ import { AppComponent } from './app.component';
 import { EmpleadoComponent } from './components/empleado/empleado.component';
 import { EmpleadoFormComponent } from './components/empleado-form/empleado-form.component';
 import { EmpleadoTableComponent } from './components/empleado-table/empleado-table.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmpleadoComponent,
     EmpleadoFormComponent,
-    EmpleadoTableComponent
+    EmpleadoTableComponent,
+    LoginComponent
   ],
 
   imports: [
