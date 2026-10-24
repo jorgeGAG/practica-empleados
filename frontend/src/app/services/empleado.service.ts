@@ -7,7 +7,7 @@ import { Empleado, ApiResponse } from '../models/empleado';
 @Injectable({ providedIn: 'root' })
 export class EmpleadoService {
 
-    readonly URL_API = 'http://localhost:3000/api/v1/empleados';
+    readonly URL_API = 'http://44.216.80.64/api/v1/empleados';
 
     // 1. BehaviorSubject privado para encapsular el estado reactivo
     private readonly _empleados$ = new BehaviorSubject<Empleado[]>([]);
