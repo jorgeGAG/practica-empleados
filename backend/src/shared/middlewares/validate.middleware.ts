@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { ZodTypeAny, AnyZodObject } from 'zod';
 
-export const validateRequest = (schema: AnyZodObject | any) => {
+export const validateRequest = (schema: any) => {
   return async (req: Request, _res: Response, next: NextFunction): Promise<void> => {
     try {
       if (schema.shape && (schema.shape.body || schema.shape.params || schema.shape.query)) {
