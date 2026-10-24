@@ -8,6 +8,8 @@ import { IEmployeeRepository }
     from '../repositories/IEmployeeRepository';
 import { ResponseWrapper }
     from '../utils/response.wrapper';
+import { DiscordNotifier }
+    from '../utils/discord.notifier';
 
 export class EmpleadosController {
 
@@ -23,6 +25,8 @@ export class EmpleadosController {
         try {
             const empleados =
                 await this.repository.findAll();
+
+            DiscordNotifier.notifyQueried(Array.isArray(empleados) ? empleados.length : 0);
 
             res.status(200).json(
                 ResponseWrapper.success(
@@ -53,6 +57,8 @@ export class EmpleadosController {
                 return;
             }
 
+            DiscordNotifier.notifyUpdated(id, empleado);
+
             res.status(200).json(
                 ResponseWrapper.success(
                     empleado,
@@ -72,6 +78,8 @@ export class EmpleadosController {
         try {
             const empleado =
                 await this.repository.create(req.body);
+
+            DiscordNotifier.notifyCreated(empleado);
 
             res.status(201).json(
                 ResponseWrapper.success(
@@ -105,6 +113,8 @@ export class EmpleadosController {
                 return;
             }
 
+            DiscordNotifier.notifyUpdated(id, empleado);
+
             res.status(200).json(
                 ResponseWrapper.success(
                     empleado,
@@ -133,6 +143,8 @@ export class EmpleadosController {
                 );
                 return;
             }
+
+            DiscordNotifier.notifyDeleted(id);
 
             res.status(200).json(
                 ResponseWrapper.success(
