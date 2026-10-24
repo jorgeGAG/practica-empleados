@@ -1,0 +1,54 @@
+<div class="card p-4 p-md-5 shadow-premium border-0 rounded-4 bg-white">
+  <div class="text-center mb-4">
+    <div class="brand-badge mb-3">
+      <i class="bi bi-shield-lock-fill"></i>
+    </div>
+    <h4 class="mb-1 fw-bold text-dark">Acceso al Laboratorio (JWT)</h4>
+    <p class="text-secondary small mb-0">Módulo de Autenticación y Confidencialidad</p>
+  </div>
+  
+  <hr class="text-muted opacity-25 my-3">
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label class="form-label fw-semibold small text-secondary">Correo Institucional</label>
+      <div class="input-group">
+        <span class="input-group-text bg-light border-end-0 text-muted">
+          <i class="bi bi-envelope-fill"></i>
+        </span>
+        <input 
+          type="email" 
+          class="form-control bg-light border-start-0 ps-0" 
+          [(ngModel)]="formModel.email" 
+          name="email" 
+          placeholder="usuario@est.ups.edu.ec"
+          required 
+          [disabled]="isLoading"
+        >
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="form-label fw-semibold small text-secondary">Contraseña</label>
+      <div class="input-group">
+        <span class="input-group-text bg-light border-end-0 text-muted">
+          <i class="bi bi-lock-fill"></i>
+        </span>
+        <input 
+          type="password" 
+          class="form-control bg-light border-start-0 ps-0" 
+          [(ngModel)]="formModel.password" 
+          name="password" 
+          placeholder="••••••••"
+          required 
+          [disabled]="isLoading"
+        >
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-3 shadow-sm btn-gradient" [disabled]="isLoading">
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+      {{ isLoading ? 'Validando Firma Criptográfica...' : 'Iniciar Sesión' }}
+    </button>
+  </form>
+</div>

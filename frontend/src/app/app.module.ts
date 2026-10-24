@@ -5,8 +5,10 @@ import {
 } from '@angular/platform-browser';
 
 import {
+  HTTP_INTERCEPTORS,
   provideHttpClient,
-  withFetch
+  withFetch,
+  withInterceptorsFromDi
 } from '@angular/common/http';
 
 import { FormsModule } from '@angular/forms';
@@ -17,6 +19,9 @@ import { EmpleadoComponent } from './components/empleado/empleado.component';
 import { EmpleadoFormComponent } from './components/empleado-form/empleado-form.component';
 import { EmpleadoTableComponent } from './components/empleado-table/empleado-table.component';
 import { LoginComponent } from './components/login/login.component';
+import { LoginDashboardComponent } from './features/auth/login-dashboard.component';
+import { LoginFormComponent } from './features/auth/components/login-form/login-form.component';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,9 @@ import { LoginComponent } from './components/login/login.component';
     EmpleadoComponent,
     EmpleadoFormComponent,
     EmpleadoTableComponent,
-    LoginComponent
+    LoginComponent,
+    LoginDashboardComponent,
+    LoginFormComponent
   ],
 
   imports: [
@@ -35,7 +42,12 @@ import { LoginComponent } from './components/login/login.component';
 
   providers: [
     provideClientHydration(),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch(), withInterceptorsFromDi()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
 
   bootstrap: [
