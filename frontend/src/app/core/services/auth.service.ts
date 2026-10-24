@@ -10,7 +10,7 @@ import { IApiResponse } from '../../shared/interfaces/response.interface'; // Al
   providedIn: 'root'
 })
 export class AuthService {
-  private API_URL = 'http://44.216.80.64/api/v1/auth';
+  private API_URL = 'https://44.216.80.64/api/v1/auth';
   private TOKEN_KEY = 'access_token';
 
   // Flujo reactivo interno del estado de autenticación (Única fuente de verdad en UI)
